@@ -1,0 +1,121 @@
+#include <iostream>
+#include <atomic>
+#include <vector>
+#include <ctime>
+using namespace std;
+
+// Khai báo biến toàn cục
+int dodaitg_nen = 5*60; // VD = 5 * 60 = số giây : độ dài thời gian của một nến quy đổi ra số giây
+enum MyEnum
+{
+	PHUT = 1,
+    DELTA = 2,
+	VOLUME=3
+};
+#pragma region ZigZag
+
+
+
+class Nen {
+	
+public:
+	Nen() {
+		Cao = Thap = Mo = Dong = 0;
+	}
+
+	bool Capnhatgiatri() { // Cap nhat gia tri
+		return true;
+	}
+
+private:
+	double Cao,Thap,Mo,Dong;
+
+};
+
+int GiaCaoNhat() {
+
+	return 1;
+}
+
+#pragma endregion
+
+#pragma region TPO
+
+struct thongtin_nen {
+	double gia_mo, gia_dong, gia_cao, gia_thap;
+	time_t thoigian_batdau_nen; // time Open thời gian mở nến
+};
+
+struct ttnen_tgt { // Struct thông tin nến thời gian thực
+	double volume;
+	bool bid_ask;
+	time_t time
+};
+
+class TpoDonVi {
+public:
+	double tpodv_giacao;
+	double tpodv_giathap;
+	//time
+};
+
+
+
+class TPO
+{
+public:
+	TPO();
+	~TPO();
+	void TinhTPO(thongtin_nen *);
+	void TinhTPOtgt(ttnen_tgt*);
+	double gia_cao, gia_thap;
+private:
+	
+	TpoDonVi *tpodonvi; // có cần thiết không ?
+	time_t tg_tieptheo; // Thời gian next tiếp theo = thời gian cũ + 30' = time kết thúc cột tpo đang chạy
+	//time_t tg_bandau; // thời gian bắt đầu  của cột tpo đang chạy ? có cần thiết 
+	int thoigian_tpodv;
+};
+
+TPO::TPO() // Nhập các mốc thời gian đẻ tính tpo , khởi tạo bộ nhớ cho  TpoDonVi
+{
+	tpodonvi = new TpoDonVi();
+	 thoigian_tpodv = 30 * 60; // 30 * 60s  số giây của 30'
+}
+
+TPO::~TPO()
+{
+}
+
+// Xử lý khi có time kích hoạt ( Mở đầu và kết thúc một tpo theo mốc tiem ) - hàm này được call khi đóng nến tối đa 5 phút ( 5m close ) dài hơn sẽ dễ có hiện tượng sai 
+//( vd nến h1 > m30 đóng = 2 tpo con nhưng ko thể xác định tpo con đó cần 4 tham số 2 open 2 close trong khi H1 chỉ có 1 open 1 close )
+// 
+// 
+// 
+// Chế độ close
+void TPO::TinhTPO(thongtin_nen * tt_nen) {
+	if (tt_nen->thoigian_batdau_nen + dodaitg_nen >= tg_tieptheo) { // Nếu nến được call
+
+	}
+}
+
+
+void TPO::TinhTPOtgt(ttnen_tgt * ttn){
+
+}
+#pragma endregion
+
+
+
+bool TimLonNhat() {
+
+	return false;
+}
+
+int main() {
+
+	std::vector <Nen> DANHSACHNEN(100); // Tạo danh sách nến 100 phần tử ban đầu . Một phần tử = 1 nến được cập nhật khi có hàm cập nhật giá trị or dùng trực tiếp Capnhatgiatri()
+	int a;
+	std::cin >> a;
+}
+
